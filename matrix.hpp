@@ -26,7 +26,7 @@ private:
 public:
 	// Constructors and Destructor
 	Matrix(size_t);
-	Matrix(size_t, size_t);
+	Matrix(size_t = 3, size_t = 1);
 	Matrix(const Matrix&);		// For matrix duplication
 	~Matrix();
 
