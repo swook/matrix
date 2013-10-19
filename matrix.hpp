@@ -45,6 +45,7 @@ public:
 	Matrix Mult(const Matrix&);
 	void Mult(const T);
 	void Div(const T);
+	Matrix VectorProduct(const Matrix&);
 
 	T Norm2();
 

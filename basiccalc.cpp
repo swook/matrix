@@ -105,3 +105,15 @@ T Matrix<T>::Norm2() {
 	return sqrt(v);
 }
 
+// 3x1 matrix cross product
+template <class T>
+Matrix<T> Matrix<T>::VectorProduct(const Matrix& m) {
+	if (nrows != 3 || m.nrows != 3 || ncols != 1 || m.ncols != 3) {
+		throw InvalidDimensionException();
+	}
+
+	Matrix n = Matrix(3, 1);
+	n.matrix[0] = matrix[1] * m.matrix[2] - matrix[2] * m.matrix[1];
+	n.matrix[1] = matrix[2] * m.matrix[0] - matrix[0] * m.matrix[2];
+	n.matrix[2] = matrix[0] * m.matrix[1] - matrix[1] * m.matrix[0];
+}
