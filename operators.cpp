@@ -19,7 +19,7 @@
 // Retrieves double stored in index i where i = row_number * nrows + col_number
 // * ncols.
 template <class T>
-T& Matrix<T>::operator() (size_t i) {
+T& Matrix<T>::operator() (size_t i) const {
 	if (i == 0 || i > size) {
 		throw IndexOutOfBoundsException();
 	}
@@ -30,7 +30,7 @@ T& Matrix<T>::operator() (size_t i) {
 // Retrieve double stored in index (j, i).
 // Indexing starts at 0.
 template <class T>
-T& Matrix<T>::operator() (size_t j, size_t i) {
+T& Matrix<T>::operator() (size_t j, size_t i) const {
 	if (i == 0 || j == 0 || i > ncols || j > nrows) {
 		throw IndexOutOfBoundsException();
 	}

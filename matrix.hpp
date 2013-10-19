@@ -45,13 +45,13 @@ public:
 	Matrix Mult(const Matrix&);
 	void Mult(const T);
 	void Div(const T);
-	Matrix VectorProduct(const Matrix&);
 
 	T Norm2();
+	Matrix VectorProduct(const Matrix&);
 
 	// Overloaded operators
-	T& operator() (size_t);
-	T& operator() (size_t, size_t);
+	T& operator() (size_t) const;
+	T& operator() (size_t, size_t) const ;
 
 	Matrix operator+ (const Matrix&);
 	Matrix operator+ (const T);
