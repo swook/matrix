@@ -38,25 +38,27 @@ public:
 	void Foreach(T (T));
 
 	// Calculation methods
-	void Add(Matrix&);
-	void Add(T);
-	void Sub(Matrix&);
-	void Sub(T);
-	Matrix Mult(Matrix&);
-	void Mult(T);
-	void Div(T);
+	void Add(const Matrix&);
+	void Add(const T);
+	void Sub(const Matrix&);
+	void Sub(const T);
+	Matrix Mult(const Matrix&);
+	void Mult(const T);
+	void Div(const T);
+
+	T Norm2();
 
 	// Overloaded operators
 	T& operator() (size_t);
 	T& operator() (size_t, size_t);
 
-	Matrix operator+ (Matrix&);
-	Matrix operator+ (T);
-	Matrix operator- (Matrix&);
-	Matrix operator- (T);
-	Matrix operator* (Matrix&);
-	Matrix operator* (T);
-	Matrix operator/ (T);
+	Matrix operator+ (const Matrix&);
+	Matrix operator+ (const T);
+	Matrix operator- (const Matrix&);
+	Matrix operator- (const T);
+	Matrix operator* (const Matrix&);
+	Matrix operator* (const T);
+	Matrix operator/ (const T);
 };
 
 #endif

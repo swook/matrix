@@ -17,7 +17,7 @@
 
 // For matrix-matrix addition
 template <class T>
-void Matrix<T>::Add(Matrix& m) {
+void Matrix<T>::Add(const Matrix& m) {
 	if (nrows != m.nrows || ncols != m.ncols) {
 		throw DimensionMismatchException();
 	}
@@ -30,7 +30,7 @@ void Matrix<T>::Add(Matrix& m) {
 
 // For per-element value addition
 template <class T>
-void Matrix<T>::Add(T v) {
+void Matrix<T>::Add(const T v) {
 	size_t i;
 	for (i = 0; i < size; i++) {
 		matrix[i] = matrix[i] + v;
@@ -39,7 +39,7 @@ void Matrix<T>::Add(T v) {
 
 // For matrix-matrix subtraction
 template <class T>
-void Matrix<T>::Sub(Matrix& m) {
+void Matrix<T>::Sub(const Matrix& m) {
 	if (nrows != m.nrows || ncols != m.ncols) {
 		throw DimensionMismatchException();
 	}
@@ -52,13 +52,13 @@ void Matrix<T>::Sub(Matrix& m) {
 
 // For per-element value subtraction
 template <class T>
-void Matrix<T>::Sub(T v) {
+void Matrix<T>::Sub(const T v) {
 	Add(-v);
 }
 
 // For matrix-matrix multiplication
 template <class T>
-Matrix<T> Matrix<T>::Mult(Matrix& m) {
+Matrix<T> Matrix<T>::Mult(const Matrix& m) {
 	size_t i, j, k;
 	size_t h = nrows + 1, h2 = m.nrows + 1, w2 = m.ncols + 1;
 
@@ -79,7 +79,7 @@ Matrix<T> Matrix<T>::Mult(Matrix& m) {
 
 // for per-element value multiplication
 template <class T>
-void Matrix<T>::Mult(T v) {
+void Matrix<T>::Mult(const T v) {
 	size_t i;
 	for (i = 0; i < size; i++) {
 		matrix[i] = matrix[i] * v;
@@ -88,8 +88,19 @@ void Matrix<T>::Mult(T v) {
 
 // for per-element value division
 template <class T>
-void Matrix<T>::Div(T v) {
-	v = 1 / v;
-	Mult(v);
+void Matrix<T>::Div(const T v) {
+	T r = 1 / v;
+	Mult(r);
+}
+
+// 2-Norm of matrix
+template <class T>
+T Matrix<T>::Norm2() {
+	T v = 0.0;
+	size_t i;
+	for (i = 0; i < size; i++) {
+		v = v + matrix[i] * matrix[i];
+	}
+	return v;
 }
 

@@ -57,14 +57,14 @@ ostream& operator<< (ostream& out, Matrix<T>& m) {
 // Convenience + overload for adding matrices.
 // Note: Duplicates this matrix to return answer.
 template <class T>
-Matrix<T> Matrix<T>::operator+ (Matrix& m) {
+Matrix<T> Matrix<T>::operator+ (const Matrix& m) {
 	Matrix m0 = *(new Matrix(*this));
 	m0.Add(m);
 	return m0;
 }
 
 template <class T>
-Matrix<T> Matrix<T>::operator+ (T v) {
+Matrix<T> Matrix<T>::operator+ (const T v) {
 	Matrix m0 = Matrix(*this);
 	m0.Add(v);
 	return m0;
@@ -73,14 +73,14 @@ Matrix<T> Matrix<T>::operator+ (T v) {
 // Convenience - overload for subtracting matrices.
 // Note: Duplicates this matrix to return answer.
 template <class T>
-Matrix<T> Matrix<T>::operator- (Matrix& m) {
+Matrix<T> Matrix<T>::operator- (const Matrix& m) {
 	Matrix m0 = Matrix(*this);
 	m0.Sub(m);
 	return m0;
 }
 
 template <class T>
-Matrix<T> Matrix<T>::operator- (T v) {
+Matrix<T> Matrix<T>::operator- (const T v) {
 	Matrix m0 = Matrix(*this);
 	m0.Sub(v);
 	return m0;
@@ -89,12 +89,12 @@ Matrix<T> Matrix<T>::operator- (T v) {
 // * overload for multiplying matrices.
 // Note: Necessarily creates new matrix to return answer by value.
 template <class T>
-Matrix<T> Matrix<T>::operator* (Matrix& m) {
+Matrix<T> Matrix<T>::operator* (const Matrix& m) {
 	return Mult(m);
 }
 
 template <class T>
-Matrix<T> Matrix<T>::operator* (T v) {
+Matrix<T> Matrix<T>::operator* (const T v) {
 	Matrix m0 = Matrix(*this);
 	m0.Mult(v);
 	return m0;
@@ -103,7 +103,7 @@ Matrix<T> Matrix<T>::operator* (T v) {
 // / overload for dividing matrix elements by provided value.
 // Note: Necessarily creates new matrix to return answer by value.
 template <class T>
-Matrix<T> Matrix<T>::operator/ (T v) {
+Matrix<T> Matrix<T>::operator/ (const T v) {
 	Matrix m0 = Matrix(*this);
 	m0.Div(v);
 	return m0;
