@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#include <cmath>
 #include "matrix.hpp"
 #include "exceptions.hpp"
 
@@ -101,6 +102,6 @@ T Matrix<T>::Norm2() {
 	for (i = 0; i < size; i++) {
 		v = v + matrix[i] * matrix[i];
 	}
-	return v;
+	return sqrt(v);
 }
 
