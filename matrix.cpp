@@ -14,7 +14,7 @@
 
 /* Constructors for class Matrix */
 
-#include "matrix.h"
+#include "matrix.hpp"
 #include "operators.cpp"
 
 // Constructor for square matrix of size NxN.

@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "matrix.h"
-#include "exceptions.h"
+#include "matrix.hpp"
+#include "exceptions.hpp"
 #include "basiccalc.cpp"
 
 // Retrieves double stored in index i where i = row_number * nrows + col_number
