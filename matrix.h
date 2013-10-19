@@ -21,13 +21,13 @@
 template <class T>
 class Matrix {
 private:
-	T* matrix;
-	void init(size_t, size_t);
+	T* matrix;			// Array holding matrix elements data
+	void init(size_t, size_t);	// Common function for constructors
 public:
 	// Constructors and Destructor
 	Matrix(size_t);
 	Matrix(size_t, size_t);
-	Matrix(const Matrix&);
+	Matrix(const Matrix&);		// For matrix duplication
 	~Matrix();
 
 	// Basic methods
@@ -35,6 +35,7 @@ public:
 	size_t ncols;
 	size_t size;
 	bool Equal(Matrix&);
+	void Foreach(T (T));
 
 	// Calculation methods
 	void Add(Matrix&);
@@ -44,7 +45,6 @@ public:
 	Matrix Mult(Matrix&);
 	void Mult(T);
 	void Div(T);
-	void Foreach(T (T));
 
 	// Overloaded operators
 	T& operator() (size_t);

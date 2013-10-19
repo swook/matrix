@@ -70,7 +70,7 @@ Matrix<T> Matrix<T>::operator+ (T v) {
 	return m0;
 }
 
-// Convenience - overload for adding matrices.
+// Convenience - overload for subtracting matrices.
 // Note: Duplicates this matrix to return answer.
 template <class T>
 Matrix<T> Matrix<T>::operator- (Matrix& m) {
@@ -100,6 +100,8 @@ Matrix<T> Matrix<T>::operator* (T v) {
 	return m0;
 }
 
+// / overload for dividing matrix elements by provided value.
+// Note: Necessarily creates new matrix to return answer by value.
 template <class T>
 Matrix<T> Matrix<T>::operator/ (T v) {
 	Matrix m0 = Matrix(*this);

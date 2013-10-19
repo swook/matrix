@@ -39,6 +39,7 @@ Matrix<T>::Matrix(const Matrix& m) {
 	}
 }
 
+// Destructor declaration for future use.
 template <class T>
 Matrix<T>::~Matrix() {
 }
@@ -50,15 +51,19 @@ void Matrix<T>::init(size_t h, size_t w) {
 		throw InvalidDimensionException();
 		return;
 	}
-	nrows = h;
-	ncols = w;
-	size = h * w;
+	nrows = h, ncols = w, size = h * w;
 	matrix = new T[size * sizeof(T)];
-	size_t i;
 }
 
+// Equal compares each element of a matrix to see if a provided matrix is equal
+// to this matrix.
 template <class T>
 bool Matrix<T>::Equal(Matrix& m) {
+	// Return if dimensions mis-match
+	if (m.nrows != nrows || m.ncols != ncols || m.size != size) {
+		return false;
+	}
+	// Element-by-element == comparison
 	size_t i;
 	for (i = 0; i < size; i++) {
 		if (m.matrix[i] != matrix[i]) {

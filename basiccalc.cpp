@@ -15,6 +15,7 @@
 #include "matrix.h"
 #include "exceptions.h"
 
+// For matrix-matrix addition
 template <class T>
 void Matrix<T>::Add(Matrix& m) {
 	if (nrows != m.nrows || ncols != m.ncols) {
@@ -27,6 +28,7 @@ void Matrix<T>::Add(Matrix& m) {
 	}
 }
 
+// For per-element value addition
 template <class T>
 void Matrix<T>::Add(T v) {
 	size_t i;
@@ -35,6 +37,7 @@ void Matrix<T>::Add(T v) {
 	}
 }
 
+// For matrix-matrix subtraction
 template <class T>
 void Matrix<T>::Sub(Matrix& m) {
 	if (nrows != m.nrows || ncols != m.ncols) {
@@ -47,11 +50,13 @@ void Matrix<T>::Sub(Matrix& m) {
 	}
 }
 
+// For per-element value subtraction
 template <class T>
 void Matrix<T>::Sub(T v) {
 	Add(-v);
 }
 
+// For matrix-matrix multiplication
 template <class T>
 Matrix<T> Matrix<T>::Mult(Matrix& m) {
 	size_t i, j, k;
@@ -72,6 +77,7 @@ Matrix<T> Matrix<T>::Mult(Matrix& m) {
 	return n;
 }
 
+// for per-element value multiplication
 template <class T>
 void Matrix<T>::Mult(T v) {
 	size_t i;
@@ -80,6 +86,7 @@ void Matrix<T>::Mult(T v) {
 	}
 }
 
+// for per-element value division
 template <class T>
 void Matrix<T>::Div(T v) {
 	v = 1 / v;
