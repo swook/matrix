@@ -18,27 +18,23 @@
 #ifndef __MATRIX_H_INCLUDED__
 #define __MATRIX_H_INCLUDED__
 
-// Include dependencies
-#include <vector>
-
-using namespace std;
-
 template <class T>
 class Matrix {
 private:
-	std::vector< vector<T> > matrix;
-	void init(int, int);
+	T* matrix;
+	void init(size_t, size_t);
 public:
 	// Constructors and Destructor
-	Matrix(int);
-	Matrix(int, int);
+	Matrix(size_t);
+	Matrix(size_t, size_t);
+	Matrix(const Matrix&);
 	~Matrix();
 
 	// Basic methods
-	int height();
-	int width();
+	size_t nrows;
+	size_t ncols;
+	size_t size;
 	bool Equal(Matrix&);
-	Matrix Duplicate();
 
 	// Calculation methods
 	void Add(Matrix&);
@@ -48,11 +44,11 @@ public:
 	Matrix Mult(Matrix&);
 	void Mult(T);
 	void Div(T);
-	void Foreach(T f(T));
+	void Foreach(T (T));
 
 	// Overloaded operators
-	double operator() (int, int);
-	void operator() (int, int, double);
+	T& operator() (size_t);
+	T& operator() (size_t, size_t);
 
 	Matrix operator+ (Matrix&);
 	Matrix operator+ (T);

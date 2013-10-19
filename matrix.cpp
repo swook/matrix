@@ -14,67 +14,55 @@
 
 /* Constructors for class Matrix */
 
-#include <vector>
 #include "matrix.h"
-#include "exceptions.h"
-
-#include "basiccalc.cpp"
 #include "operators.cpp"
-
-using namespace std;
 
 // Constructor for square matrix of size NxN.
 template <class T>
-Matrix<T>::Matrix(int N) {
+Matrix<T>::Matrix(size_t N) {
 	init(N, N);
 }
 
 // Constructor for matrix of size hxw.
 template <class T>
-Matrix<T>::Matrix(int h, int w) {
+Matrix<T>::Matrix(size_t h, size_t w) {
 	init(h, w);
 }
 
-// Destructor for Matrix
+// Constructor for duplicating existing matrix.
+template <class T>
+Matrix<T>::Matrix(const Matrix& m) {
+	init(m.nrows, m.ncols);
+	size_t i;
+	for (i = 0; i < size; i++) {
+		matrix[i] = m.matrix[i];
+	}
+}
+
 template <class T>
 Matrix<T>::~Matrix() {
-	int h = height(), w = width(), i, j;
-	for (j = 0; j < h; j++) {
-		vector<T>().swap(matrix[j]);
-	}
-	vector< vector<T> >().swap(matrix);
 }
 
 // Common constructor for matrix of size hxw.
 template <class T>
-void Matrix<T>::init(int h, int w) {
+void Matrix<T>::init(size_t h, size_t w) {
 	if (h < 1 || w < 1) {
 		throw InvalidDimensionException();
 		return;
 	}
-	matrix = vector< vector<T> >(h, vector<T>(w));
-}
-
-// Retrieve matrix height
-template <class T>
-int Matrix<T>::height() {
-	return matrix.size();
-}
-
-// Retrieve matrix width
-template <class T>
-int Matrix<T>::width() {
-	return matrix[0].size();
+	nrows = h;
+	ncols = w;
+	size = h * w;
+	matrix = new T[size * sizeof(T)];
+	size_t i;
 }
 
 template <class T>
 bool Matrix<T>::Equal(Matrix& m) {
-	int h = height(), w = width(), i, j;
-	for (j = 0; j < h; j++) {
-		for (i = 0; i< w; i++) {
-			if (m.matrix[j][i] != matrix[j][i]) {
-				return false;
-			}
+	size_t i;
+	for (i = 0; i < size; i++) {
+		if (m.matrix[i] != matrix[i]) {
+			return false;
 		}
 	}
 	return true;
@@ -83,23 +71,8 @@ bool Matrix<T>::Equal(Matrix& m) {
 // foreach takes a function and applies a calculation per element.
 template <class T>
 void Matrix<T>::Foreach(T f(T)) {
-	int h = height(), w = width(), i, j;
-	for (j = 0; j < h; j++) {
-		for (i = 0; i< w; i++) {
-			matrix[j][i] = f(matrix[j][i]);
-		}
+	size_t i;
+	for (i = 0; i < size; i++) {
+		matrix[i] = f(matrix[i]);
 	}
 }
-
-template <class T>
-Matrix<T> Matrix<T>::Duplicate() {
-	int h = height(), w = width(), i, j;
-	Matrix m = Matrix(h, w);
-	for (j = 0; j < h; j++) {
-		for (i = 0; i< w; i++) {
-			m.matrix[j][i] = matrix[j][i];
-		}
-	}
-	return m;
-}
-

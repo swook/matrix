@@ -12,40 +12,40 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include <vector>
-#include "stdio.h"
 #include "matrix.h"
 #include "exceptions.h"
-
 #include "basiccalc.cpp"
 
+// Retrieves double stored in index i where i = row_number * nrows + col_number
+// * ncols.
+template <class T>
+T& Matrix<T>::operator() (size_t i) {
+	if (i == 0 || i > size) {
+		throw IndexOutOfBoundsException();
+	}
+	i--;
+	return matrix[i];
+}
+
 // Retrieve double stored in index (j, i).
-// Indexing starts at 1.
+// Indexing starts at 0.
 template <class T>
-double Matrix<T>::operator() (int j, int i) {
-	if (i < 1 || j < 1) {
+T& Matrix<T>::operator() (size_t j, size_t i) {
+	if (i == 0 || j == 0 || i > ncols || j > nrows) {
 		throw IndexOutOfBoundsException();
 	}
-	double v = matrix[--j][--i];
-	return v;
+	i--;
+	j--;
+	return matrix[j*nrows + i*ncols];
 }
 
-// Assign an index with value v.
-// Indexing starts at 1.
-template <class T>
-void Matrix<T>::operator() (int j, int i, double v) {
-	if (i < 1 || j < 1) {
-		throw IndexOutOfBoundsException();
-	}
-	matrix[--j][--i] = v;
-}
-
+// << overload to allow for formatting Matrix with cout.
 template <class T>
 ostream& operator<< (ostream& out, Matrix<T>& m) {
-	int h = m.height() + 1, w = m.width() + 1, i, j;
+	size_t i, j, h = m.nrows + 1, w = m.ncols + 1;
 	out << "[\n";
 	for (j = 1; j < h; j++) {
-		for (i = 1; i< w; i++) {
+		for (i = 1; i < w; i++) {
 			out << "\t" << m(j, i);
 		}
 		out << "\n";
@@ -58,14 +58,14 @@ ostream& operator<< (ostream& out, Matrix<T>& m) {
 // Note: Duplicates this matrix to return answer.
 template <class T>
 Matrix<T> Matrix<T>::operator+ (Matrix& m) {
-	Matrix m0 = Duplicate();
+	Matrix m0 = *(new Matrix(*this));
 	m0.Add(m);
 	return m0;
 }
 
 template <class T>
 Matrix<T> Matrix<T>::operator+ (T v) {
-	Matrix m0 = Duplicate();
+	Matrix m0 = Matrix(*this);
 	m0.Add(v);
 	return m0;
 }
@@ -74,14 +74,14 @@ Matrix<T> Matrix<T>::operator+ (T v) {
 // Note: Duplicates this matrix to return answer.
 template <class T>
 Matrix<T> Matrix<T>::operator- (Matrix& m) {
-	Matrix m0 = Duplicate();
+	Matrix m0 = Matrix(*this);
 	m0.Sub(m);
 	return m0;
 }
 
 template <class T>
 Matrix<T> Matrix<T>::operator- (T v) {
-	Matrix m0 = Duplicate();
+	Matrix m0 = Matrix(*this);
 	m0.Sub(v);
 	return m0;
 }
@@ -95,14 +95,14 @@ Matrix<T> Matrix<T>::operator* (Matrix& m) {
 
 template <class T>
 Matrix<T> Matrix<T>::operator* (T v) {
-	Matrix m0 = Duplicate();
+	Matrix m0 = Matrix(*this);
 	m0.Mult(v);
 	return m0;
 }
 
 template <class T>
 Matrix<T> Matrix<T>::operator/ (T v) {
-	Matrix m0 = Duplicate();
+	Matrix m0 = Matrix(*this);
 	m0.Div(v);
 	return m0;
 }

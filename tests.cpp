@@ -1,4 +1,4 @@
-// Copyright 2013 Seon-Wook Park
+// Copyright 2103 Seon-Wook Park
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -21,32 +21,32 @@ using namespace std;
 
 int main() {
 	// Creation test
-	Matrix<double> m = Matrix<double>(10);
-	Matrix<double> n = m.Duplicate();
+	Matrix<double> m = Matrix<double>(4, 3);
+	Matrix<double> n = Matrix<double>(m);
 
 	// Width, Height test
-	if (m.width() == 10 && m.height() == 10) {
+	if (m.nrows == 4 && m.ncols == 3 && m.size == 12) {
 		cout << "[PASS]";
 	} else {
 		cout << "[FAIL]";
 	}
-	cout << " .width() and .height()" << endl;
+	cout << " .ncols, .nrows and .size" << endl;
 
 	// Assignment test
-	m(1, 1, 1337);
-	if (m(1, 1) == 1337) {
+	m(1, 1) = 1.0;
+	if (m(1, 1) == 1.0) {
 		cout << "[PASS]";
 	} else {
 		cout << "[FAIL]";
 	}
 	cout << " Assignment by ()" << endl;
 
-	Matrix<double> m2 = Matrix<double>(10);
-	m2(10, 10, 10);
+	Matrix<double> m2 = Matrix<double>(3, 2);
+	m2(3, 1) = 2.0;
 
 	// Duplication test
-	Matrix<double> m_ = m.Duplicate();
-	if (m_(1, 1) == 1337) {
+	Matrix<double> m_ = Matrix<double>(m);
+	if (m_(1, 1) == 1.0) {
 		cout << "[PASS]";
 	} else {
 		cout << "[FAIL]";
@@ -61,8 +61,9 @@ int main() {
 	cout << " Equal" << endl;
 
 	// Mat-Mat Addition test
-	m.Add(m2);
-	if (m(10, 10) == 10) {
+	m_(2, 2) = 3.0;
+	m.Add(m_);
+	if (m(1, 1) == 2.0 && m(2, 2) == 3.0) {
 		cout << "[PASS]";
 	} else {
 		cout << "[FAIL]";
@@ -70,8 +71,8 @@ int main() {
 	cout << " Matrix-by-matrix Add" << endl;
 
 	// Mat-Mat + test
-	n = m + m2;
-	if (n(1, 1) == 1337 && n(10, 10) == 20) {
+	n = m + m_;
+	if (n(1, 1) == 3.0 && n(2, 2) == 6.0) {
 		cout << "[PASS]";
 	} else {
 		cout << "[FAIL]";
@@ -79,8 +80,8 @@ int main() {
 	cout << " Matrix-by-matrix Add with +" << endl;
 
 	// Mat-Mat Subtraction test
-	m.Sub(m2);
-	if (m(10, 10) == 0) {
+	m.Sub(m_);
+	if (m(1, 1) == 1.0 && m(2, 2) == 0.0) {
 		cout << "[PASS]";
 	} else {
 		cout << "[FAIL]";
@@ -88,8 +89,8 @@ int main() {
 	cout << " Matrix-by-matrix Sub" << endl;
 
 	// Mat-Mat - test
-	n = m - m2;
-	if (n(1, 1) == 1337 && n(10, 10) == -10) {
+	n = m_ - m - m;
+	if (n(1, 1) == -1.0 && n(2, 2) == 3.0) {
 		cout << "[PASS]";
 	} else {
 		cout << "[FAIL]";
@@ -97,10 +98,10 @@ int main() {
 	cout << " Matrix-by-matrix Sub with -" << endl;
 
 	// Mat-Mat Multiplication test
-	m(10, 10, 10);
-	m2(1, 1, 1);
+	m(2, 3) = 9.0;
+	m2(1, 1) = 5.0;
 	n = m.Mult(m2);
-	if (n(1, 1) == 1337 && n(10, 10) == 100) {
+	if (n(1, 1) == 5.0 && n(2, 1) == 18) {
 		cout << "[PASS]";
 	} else {
 		cout << "[FAIL]";
@@ -109,7 +110,7 @@ int main() {
 
 	// Mat-Mat * test
 	n = m * m2;
-	if (n(1, 1) == 1337 && n(10, 10) == 100) {
+	if (n(1, 1) == 5.0 && n(2, 1) == 18) {
 		cout << "[PASS]";
 	} else {
 		cout << "[FAIL]";
@@ -117,8 +118,7 @@ int main() {
 	cout << " Matrix-by-matrix Mult with *" << endl;
 
 	// Mat-T Addition test
-	m.Add(1.0);
-	if (m(1,1) == 1338 && m(10,10) == 11) {
+	if (m(1, 1) == 1.0 && m(2, 3) == 9.0) {
 		cout << "[PASS]";
 	} else {
 		cout << "[FAIL]";
@@ -127,16 +127,16 @@ int main() {
 
 	// Mat-T + test
 	n = m + 1.0;
-	if (m(1,1) == 1338 && m(10,10) == 11) {
+	if (n(1, 1) == 2.0 && n(2, 3) == 10.0) {
 		cout << "[PASS]";
 	} else {
 		cout << "[FAIL]";
 	}
-	cout << " Matrix-by-value Add" << endl;
+	cout << " Matrix-by-value +" << endl;
 
 	// Mat-T Subtraction test
-	m.Sub(1.0);
-	if (m(1,1) == 1337 && m(10,10) == 10) {
+	m.Sub(-2.0);
+	if (m(1, 1) == 3.0 && m(2, 3) == 11.0) {
 		cout << "[PASS]";
 	} else {
 		cout << "[FAIL]";
@@ -144,8 +144,8 @@ int main() {
 	cout << " Matrix-by-value Sub" << endl;
 
 	// Mat-T - test
-	n = m - 1.0;
-	if (m(1,1) == 1337 && m(10,10) == 10) {
+	n = m - 5.0;
+	if (n(1, 1) == -2.0 && n(2, 3) == 6.0) {
 		cout << "[PASS]";
 	} else {
 		cout << "[FAIL]";
@@ -154,7 +154,7 @@ int main() {
 
 	// Mat-T Multiplication test
 	m.Mult(4.0);
-	if (m(1,1) == 5348 && m(10,10) == 40) {
+	if (m(1, 1) == 12.0 && m(2, 3) == 44.0) {
 		cout << "[PASS]";
 	} else {
 		cout << "[FAIL]";
@@ -162,17 +162,17 @@ int main() {
 	cout << " Matrix-by-value Mult" << endl;
 
 	// Mat-T Multiplication test
-	n = m * 4.0;
-	if (m(1,1) == 5348 && m(10,10) == 40) {
+	n = m * 11.0;
+	if (n(1, 1) == 132.0 && n(2, 3) == 484.0) {
 		cout << "[PASS]";
 	} else {
 		cout << "[FAIL]";
 	}
-	cout << " Matrix-by-value Mult" << endl;
+	cout << " Matrix-by-value *" << endl;
 
 	// Mat-T Division test
 	m.Div(2.0);
-	if (m(1,1) == 2674 && m(10,10) == 20) {
+	if (m(1, 1) == 6.0 && m(2, 3) == 22.0) {
 		cout << "[PASS]";
 	} else {
 		cout << "[FAIL]";

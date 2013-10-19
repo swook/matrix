@@ -12,51 +12,38 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include <vector>
 #include "matrix.h"
 #include "exceptions.h"
 
-#ifndef __BASICCALC_CPP_INCLUDED__
-#define __BASICCALC_CPP_INCLUDED__
-
 template <class T>
 void Matrix<T>::Add(Matrix& m) {
-	int h = height(), w = width(), i, j;
-
-	if (h != m.height() || w != m.width()) {
+	if (nrows != m.nrows || ncols != m.ncols) {
 		throw DimensionMismatchException();
 	}
 
-	for (j = 0; j < h; j++) {
-		for (i = 0; i< w; i++) {
-			matrix[j][i] = matrix[j][i] + m.matrix[j][i];
-		}
+	size_t i;
+	for (i = 0; i < size; i++) {
+		matrix[i] = matrix[i] + m.matrix[i];
 	}
 }
 
 template <class T>
 void Matrix<T>::Add(T v) {
-	int h = height(), w = width(), i, j;
-
-	for (j = 0; j < h; j++) {
-		for (i = 0; i< w; i++) {
-			matrix[j][i] = matrix[j][i] + v;
-		}
+	size_t i;
+	for (i = 0; i < size; i++) {
+		matrix[i] = matrix[i] + v;
 	}
 }
 
 template <class T>
 void Matrix<T>::Sub(Matrix& m) {
-	int h = height(), w = width(), i, j;
-
-	if (h != m.height() || w != m.width()) {
+	if (nrows != m.nrows || ncols != m.ncols) {
 		throw DimensionMismatchException();
 	}
 
-	for (j = 0; j < h; j++) {
-		for (i = 0; i< w; i++) {
-			matrix[j][i] = matrix[j][i] - m.matrix[j][i];
-		}
+	size_t i;
+	for (i = 0; i < size; i++) {
+		matrix[i] = matrix[i] - m.matrix[i];
 	}
 }
 
@@ -67,18 +54,18 @@ void Matrix<T>::Sub(T v) {
 
 template <class T>
 Matrix<T> Matrix<T>::Mult(Matrix& m) {
-	int h = height(), w = width(), i, j, k;
-	int h2 = m.height(), w2 = m.width();
+	size_t i, j, k;
+	size_t h = nrows + 1, h2 = m.nrows + 1, w2 = m.ncols + 1;
 
-	if (w != h2) {
+	if (ncols != m.nrows) {
 		throw DimensionMismatchException();
 	}
-	Matrix n = Matrix(h, w2);
+	Matrix n = Matrix(nrows, m.ncols);
 
-	for (j = 0; j < h; j++) {
-		for (i = 0; i< w2; i++) {
-			for (k = 0; k < h2; k++) {
-				n.matrix[j][i] += matrix[j][k] * m.matrix[k][i];
+	for (j = 1; j < h; j++) {
+		for (i = 1; i< w2; i++) {
+			for (k = 1; k < h2; k++) {
+				n(j, i) += (*this)(j, k) * m(k, i);
 			}
 		}
 	}
@@ -87,12 +74,9 @@ Matrix<T> Matrix<T>::Mult(Matrix& m) {
 
 template <class T>
 void Matrix<T>::Mult(T v) {
-	int h = height(), w = width(), i, j;
-
-	for (j = 0; j < h; j++) {
-		for (i = 0; i< w; i++) {
-			matrix[j][i] = matrix[j][i] * v;
-		}
+	size_t i;
+	for (i = 0; i < size; i++) {
+		matrix[i] = matrix[i] * v;
 	}
 }
 
@@ -102,4 +86,3 @@ void Matrix<T>::Div(T v) {
 	Mult(v);
 }
 
-#endif
