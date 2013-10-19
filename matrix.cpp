@@ -14,6 +14,7 @@
 
 /* Constructors for class Matrix */
 
+#include "stdlib.h"
 #include "matrix.hpp"
 #include "operators.cpp"
 
@@ -52,7 +53,7 @@ void Matrix<T>::init(size_t h, size_t w) {
 		return;
 	}
 	nrows = h, ncols = w, size = h * w;
-	matrix = new T[size * sizeof(T)];
+	matrix = (T*) calloc(size, sizeof(T));
 }
 
 // Equal compares each element of a matrix to see if a provided matrix is equal
