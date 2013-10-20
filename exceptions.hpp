@@ -20,7 +20,6 @@
 #ifndef __EXCEPTIONS_H_INCLUDED__
 #define __EXCEPTIONS_H_INCLUDED__
 
-
 // Exception for invalid dimensions provided on Matrix construction.
 class InvalidDimensionException : public std::exception {
 	virtual const char* what() const throw() {

@@ -18,6 +18,7 @@
 #include <iostream>
 
 #include "matrix.hpp"
+#include "exceptions.hpp"
 #include "operators.cpp"
 
 // Constructor for square matrix of size NxN.
