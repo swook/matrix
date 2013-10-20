@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#include <iostream>
+
 #include "matrix.hpp"
 #include "exceptions.hpp"
 #include "basiccalc.cpp"
@@ -41,7 +43,7 @@ T& Matrix<T>::operator() (size_t j, size_t i) const {
 
 // << overload to allow for formatting Matrix with cout.
 template <class T>
-ostream& operator<< (ostream& out, Matrix<T>& m) {
+std::ostream& operator<< (std::ostream& out, Matrix<T>& m) {
 	size_t i, j, h = m.nrows + 1, w = m.ncols + 1;
 	out << "[\n";
 	for (j = 1; j < h; j++) {

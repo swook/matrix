@@ -18,6 +18,8 @@
 #ifndef __MATRIX_H_INCLUDED__
 #define __MATRIX_H_INCLUDED__
 
+#include <cstddef>
+
 template <class T>
 class Matrix {
 private:

@@ -16,29 +16,27 @@
 
 #include <exception>
 
-using namespace std;
-
 // Prevent multiple imports
 #ifndef __EXCEPTIONS_H_INCLUDED__
 #define __EXCEPTIONS_H_INCLUDED__
 
 
 // Exception for invalid dimensions provided on Matrix construction.
-class InvalidDimensionException : public exception {
+class InvalidDimensionException : public std::exception {
 	virtual const char* what() const throw() {
 		return "Invalid matrix dimensions provided.";
 	}
 };
 
 // Exception for invalid indexing of Matrix.
-class IndexOutOfBoundsException : public exception {
+class IndexOutOfBoundsException : public std::exception {
 	virtual const char* what() const throw() {
 		return "Index out of bounds.";
 	}
 };
 
 // Exception for mismatching input Matrix dimensions
-class DimensionMismatchException : public exception {
+class DimensionMismatchException : public std::exception {
 	virtual const char* what() const throw() {
 		return "Dimension mismatch.";
 	}

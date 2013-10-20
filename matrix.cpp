@@ -14,7 +14,9 @@
 
 /* Constructors for class Matrix */
 
-#include "stdlib.h"
+#include <cstdlib>
+#include <iostream>
+
 #include "matrix.hpp"
 #include "operators.cpp"
 
