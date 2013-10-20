@@ -36,6 +36,8 @@ Matrix<T>::Matrix(size_t h, size_t w) {
 template <class T>
 Matrix<T>::Matrix(const Matrix& m) {
 	init(m.nrows, m.ncols);
+	isTranspose = m.isTranspose;
+
 	size_t i;
 	for (i = 0; i < size; i++) {
 		matrix[i] = m.matrix[i];
@@ -56,6 +58,25 @@ void Matrix<T>::init(size_t h, size_t w) {
 	}
 	nrows = h, ncols = w, size = h * w;
 	matrix = new T[size * sizeof(T)];
+	isTranspose = false;
+}
+
+template <class T>
+size_t Matrix<T>::height() const {
+	if (isTranspose) {
+		return ncols;
+	} else {
+		return nrows;
+	}
+}
+
+template <class T>
+size_t Matrix<T>::width() const {
+	if (isTranspose) {
+		return nrows;
+	} else {
+		return ncols;
+	}
 }
 
 // Equal compares each element of a matrix to see if a provided matrix is equal
@@ -63,14 +84,16 @@ void Matrix<T>::init(size_t h, size_t w) {
 template <class T>
 bool Matrix<T>::Equal(Matrix& m) {
 	// Return if dimensions mis-match
-	if (m.nrows != nrows || m.ncols != ncols || m.size != size) {
+	if (m.size != size) {
 		return false;
 	}
 	// Element-by-element == comparison
-	size_t i;
-	for (i = 0; i < size; i++) {
-		if (m.matrix[i] != matrix[i]) {
-			return false;
+	size_t i, j, h = m.height() + 1, w = m.width() + 1;
+	for (j = 1; j < h; j++) {
+		for (i = 1; i < w; i++) {
+			if (m(j, i) != (*this)(j, i)) {
+				return false;
+			}
 		}
 	}
 	return true;

@@ -23,19 +23,22 @@
 template <class T>
 class Matrix {
 private:
-	T* matrix;			// Array holding matrix elements data
-	void init(size_t, size_t);	// Common function for constructors
+	T*   matrix;                    // Array holding matrix elements data
+	size_t nrows;
+	size_t ncols;
+	bool isTranspose;
+	void init(size_t, size_t);      // Common function for constructors
 public:
 	// Constructors and Destructor
 	Matrix(size_t);
 	Matrix(size_t, size_t);
-	Matrix(const Matrix&);		// For matrix duplication
+	Matrix(const Matrix&); // For matrix duplication
 	~Matrix();
 
 	// Basic methods
-	size_t nrows;
-	size_t ncols;
 	size_t size;
+	size_t height() const;
+	size_t width()  const;
 	bool   Equal(Matrix&);
 	void   Foreach(T (T));
 
@@ -48,6 +51,7 @@ public:
 	void   Mult(const T);
 	void   Div(const T);
 
+	void   Transpose();
 	T      Norm2();
 	Matrix VectorProduct(const Matrix&);
 

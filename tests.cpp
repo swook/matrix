@@ -25,12 +25,12 @@ int main() {
 	Matrix<double> n = Matrix<double>(m);
 
 	// Width, Height test
-	if (m.nrows == 4 && m.ncols == 3 && m.size == 12) {
+	if (m.height() == 4 && m.width() == 3 && m.size == 12) {
 		cout << "[PASS]";
 	} else {
 		cout << "[FAIL]";
 	}
-	cout << " .ncols, .nrows and .size" << endl;
+	cout << " .height(), .width() and .size" << endl;
 
 	// Assignment test
 	m(1, 1) = 1.0;

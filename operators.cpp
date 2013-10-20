@@ -18,8 +18,9 @@
 #include "exceptions.hpp"
 #include "basiccalc.cpp"
 
-// Retrieves double stored in index i where i = row_number * nrows + col_number
-// * ncols.
+// Retrieves double stored in index i.
+// Note: The order of indexing is irrespective of whether the matrix is in a
+// transpose state.
 template <class T>
 T& Matrix<T>::operator() (size_t i) const {
 	if (i == 0 || i > size) {
@@ -33,18 +34,22 @@ T& Matrix<T>::operator() (size_t i) const {
 // Indexing starts at 0.
 template <class T>
 T& Matrix<T>::operator() (size_t j, size_t i) const {
-	if (i == 0 || j == 0 || i > ncols || j > nrows) {
+	if (i == 0 || j == 0 || i > width() || j > height()) {
 		throw IndexOutOfBoundsException();
 	}
 	i--;
 	j--;
-	return matrix[j*nrows + i*ncols];
+	if (isTranspose) {
+		return matrix[j + i*ncols];
+	} else {
+		return matrix[j*ncols + i];
+	}
 }
 
 // << overload to allow for formatting Matrix with cout.
 template <class T>
 std::ostream& operator<< (std::ostream& out, Matrix<T>& m) {
-	size_t i, j, h = m.nrows + 1, w = m.ncols + 1;
+	size_t i, j, h = m.height() + 1, w = m.width() + 1;
 	out << "[\n";
 	for (j = 1; j < h; j++) {
 		for (i = 1; i < w; i++) {

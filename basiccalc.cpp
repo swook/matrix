@@ -16,10 +16,15 @@
 #include "matrix.hpp"
 #include "exceptions.hpp"
 
+template <class T>
+void Matrix<T>::Transpose() {
+	isTranspose = !isTranspose;
+}
+
 // For matrix-matrix addition
 template <class T>
 void Matrix<T>::Add(const Matrix& m) {
-	if (nrows != m.nrows || ncols != m.ncols) {
+	if (height() != m.height() || width() != m.width()) {
 		throw DimensionMismatchException();
 	}
 
@@ -41,7 +46,7 @@ void Matrix<T>::Add(const T v) {
 // For matrix-matrix subtraction
 template <class T>
 void Matrix<T>::Sub(const Matrix& m) {
-	if (nrows != m.nrows || ncols != m.ncols) {
+	if (height() != m.height() || width() != m.width()) {
 		throw DimensionMismatchException();
 	}
 
@@ -61,12 +66,12 @@ void Matrix<T>::Sub(const T v) {
 template <class T>
 Matrix<T> Matrix<T>::Mult(const Matrix& m) {
 	size_t i, j, k;
-	size_t h = nrows + 1, h2 = m.nrows + 1, w2 = m.ncols + 1;
+	size_t h = height() + 1, h2 = m.height() + 1, w2 = m.width() + 1;
 
-	if (ncols != m.nrows) {
+	if (width() != m.height()) {
 		throw DimensionMismatchException();
 	}
-	Matrix n = Matrix(nrows, m.ncols);
+	Matrix n = Matrix(height(), m.width());
 
 	for (j = 1; j < h; j++) {
 		for (i = 1; i< w2; i++) {
@@ -108,7 +113,7 @@ T Matrix<T>::Norm2() {
 // 3x1 matrix cross product
 template <class T>
 Matrix<T> Matrix<T>::VectorProduct(const Matrix& m) {
-	if (nrows != 3 || m.nrows != 3 || ncols != 1 || m.ncols != 3) {
+	if (height() != 3 || m.height() != 3 || width() != 1 || m.width() != 3) {
 		throw InvalidDimensionException();
 	}
 
