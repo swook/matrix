@@ -36,19 +36,19 @@ public:
 	size_t nrows;
 	size_t ncols;
 	size_t size;
-	bool Equal(Matrix&);
-	void Foreach(T (T));
+	bool   Equal(Matrix&);
+	void   Foreach(T (T));
 
 	// Calculation methods
-	void Add(const Matrix&);
-	void Add(const T);
-	void Sub(const Matrix&);
-	void Sub(const T);
+	void   Add(const Matrix&);
+	void   Add(const T);
+	void   Sub(const Matrix&);
+	void   Sub(const T);
 	Matrix Mult(const Matrix&);
-	void Mult(const T);
-	void Div(const T);
+	void   Mult(const T);
+	void   Div(const T);
 
-	T Norm2();
+	T      Norm2();
 	Matrix VectorProduct(const Matrix&);
 
 	// Overloaded operators
