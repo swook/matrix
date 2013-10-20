@@ -53,6 +53,7 @@ public:
 
 	void   Transpose();
 	T      Norm2();
+	T      Norm2Squared();
 	Matrix VectorProduct(const Matrix&);
 
 	// Overloaded operators

@@ -102,12 +102,18 @@ void Matrix<T>::Div(const T v) {
 // 2-Norm of matrix
 template <class T>
 T Matrix<T>::Norm2() {
+	return sqrt(Norm2Squared());
+}
+
+// 2-Norm of matrix
+template <class T>
+T Matrix<T>::Norm2Squared() {
 	T v = 0.0;
 	size_t i;
 	for (i = 0; i < size; i++) {
 		v = v + matrix[i] * matrix[i];
 	}
-	return sqrt(v);
+	return v;
 }
 
 // 3x1 matrix cross product
