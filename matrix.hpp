@@ -15,8 +15,8 @@
 /* Matrix class for basic matrix operations */
 
 // Prevent multiple imports
-#ifndef __MATRIX_H_INCLUDED__
-#define __MATRIX_H_INCLUDED__
+#ifndef __MATRIX_HPP_INCLUDED__
+#define __MATRIX_HPP_INCLUDED__
 
 #include <cstddef>
 

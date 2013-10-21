@@ -17,8 +17,8 @@
 #include <exception>
 
 // Prevent multiple imports
-#ifndef __EXCEPTIONS_H_INCLUDED__
-#define __EXCEPTIONS_H_INCLUDED__
+#ifndef __EXCEPTIONS_HPP_INCLUDED__
+#define __EXCEPTIONS_HPP_INCLUDED__
 
 // Exception for invalid dimensions provided on Matrix construction.
 class InvalidDimensionException : public std::exception {

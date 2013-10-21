@@ -14,6 +14,9 @@
 
 /* Constructors for class Matrix */
 
+#ifndef __MATRIX_CPP_INCLUDED__
+#define __MATRIX_CPP_INCLUDED__
+
 #include <iostream>
 
 #include "matrix.hpp"
@@ -114,3 +117,5 @@ void Matrix<T>::Foreach(T f(T)) {
 		matrix[i] = f(matrix[i]);
 	}
 }
+
+#endif
