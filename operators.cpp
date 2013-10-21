@@ -61,57 +61,83 @@ std::ostream& operator<< (std::ostream& out, Matrix<T>& m) {
 	return out;
 }
 
+// = overload to assign copies of matrices to variables
+template <class T>
+Matrix<T>& Matrix<T>::operator= (const Matrix<T>& m) {
+	copy(m);
+	return *this;
+}
+
 // Convenience + overload for adding matrices.
 // Note: Duplicates this matrix to return answer.
 template <class T>
-Matrix<T> Matrix<T>::operator+ (const Matrix& m) {
-	Matrix m0 = *(new Matrix(*this));
-	m0.Add(m);
-	return m0;
+Matrix<T> operator+ (const Matrix<T>& m1, const Matrix<T>& m2) {
+	Matrix<T> n = Matrix<T>(m1);
+	n.Add(m2);
+	return n;
 }
 
 template <class T>
-Matrix<T> Matrix<T>::operator+ (const T v) {
-	Matrix m0 = Matrix(*this);
-	m0.Add(v);
-	return m0;
+Matrix<T> operator+ (const Matrix<T>& m, const T v) {
+	Matrix<T> n = Matrix<T>(m);
+	n.Add(v);
+	return n;
+}
+template <class T>
+Matrix<T> operator+ (const T v, const Matrix<T>& m) {
+	Matrix<T> n = Matrix<T>(m);
+	n.Add(v);
+	return n;
 }
 
 // Convenience - overload for subtracting matrices.
 // Note: Duplicates this matrix to return answer.
 template <class T>
-Matrix<T> Matrix<T>::operator- (const Matrix& m) {
-	Matrix m0 = Matrix(*this);
-	m0.Sub(m);
-	return m0;
+Matrix<T> operator- (const Matrix<T>& m1, const Matrix<T>& m2) {
+	Matrix<T> n = Matrix<T>(m1);
+	n.Sub(m2);
+	return n;
 }
 
 template <class T>
-Matrix<T> Matrix<T>::operator- (const T v) {
-	Matrix m0 = Matrix(*this);
-	m0.Sub(v);
-	return m0;
+Matrix<T> operator- (const Matrix<T>& m, const T v) {
+	Matrix<T> n = Matrix<T>(m);
+	n.Sub(v);
+	return n;
+}
+template <class T>
+Matrix<T> operator- (const T v, const Matrix<T>& m) {
+	Matrix<T> n = Matrix<T>(m);
+	n.Mult(-1.0);
+	n.Add(v);
+	return n;
 }
 
 // * overload for multiplying matrices.
 // Note: Necessarily creates new matrix to return answer by value.
 template <class T>
-Matrix<T> Matrix<T>::operator* (const Matrix& m) {
-	return Mult(m);
+Matrix<T> operator* (const Matrix<T>& m1, const Matrix<T>& m2) {
+	return m1.Mult(m2);
 }
 
 template <class T>
-Matrix<T> Matrix<T>::operator* (const T v) {
-	Matrix m0 = Matrix(*this);
-	m0.Mult(v);
-	return m0;
+Matrix<T> operator* (const Matrix<T>& m, const T v) {
+	Matrix<T> n = Matrix<T>(m);
+	n.Mult(v);
+	return n;
+}
+template <class T>
+Matrix<T> operator* (const T v, const Matrix<T>& m) {
+	Matrix<T> n = Matrix<T>(m);
+	n.Mult(v);
+	return n;
 }
 
 // / overload for dividing matrix elements by provided value.
 // Note: Necessarily creates new matrix to return answer by value.
 template <class T>
-Matrix<T> Matrix<T>::operator/ (const T v) {
-	Matrix m0 = Matrix(*this);
-	m0.Div(v);
-	return m0;
+Matrix<T> operator/ (const Matrix<T>& m, const T v) {
+	Matrix<T> n = Matrix<T>(m);
+	n.Div(v);
+	return n;
 }

@@ -64,7 +64,7 @@ void Matrix<T>::Sub(const T v) {
 
 // For matrix-matrix multiplication
 template <class T>
-Matrix<T> Matrix<T>::Mult(const Matrix& m) {
+Matrix<T> Matrix<T>::Mult(const Matrix& m) const {
 	size_t i, j, k;
 	size_t h = height() + 1, h2 = m.height() + 1, w2 = m.width() + 1;
 

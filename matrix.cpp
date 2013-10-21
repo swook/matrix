@@ -20,6 +20,18 @@
 #include "exceptions.hpp"
 #include "operators.cpp"
 
+// Common constructor for matrix of size hxw.
+template <class T>
+void Matrix<T>::init(size_t h, size_t w) {
+	if (h < 1 || w < 1) {
+		throw InvalidDimensionException();
+		return;
+	}
+	nrows = h, ncols = w, size = h * w;
+	matrix = new T[size]();
+	isTranspose = false;
+}
+
 // Constructor for square matrix of size NxN.
 template <class T>
 Matrix<T>::Matrix(size_t N) {
@@ -32,9 +44,9 @@ Matrix<T>::Matrix(size_t h, size_t w) {
 	init(h, w);
 }
 
-// Constructor for duplicating existing matrix.
+// Copy matrix into new matrix
 template <class T>
-Matrix<T>::Matrix(const Matrix& m) {
+void Matrix<T>::copy(const Matrix& m) {
 	init(m.nrows, m.ncols);
 	isTranspose = m.isTranspose;
 
@@ -44,21 +56,14 @@ Matrix<T>::Matrix(const Matrix& m) {
 	}
 }
 
-// Destructor declaration for future use.
+// Constructor for duplicating existing matrix.
 template <class T>
-Matrix<T>::~Matrix() {
+Matrix<T>::Matrix(const Matrix& m) {
+	copy(m);
 }
 
-// Common constructor for matrix of size hxw.
+// Destructor declaration for future use.
 template <class T>
-void Matrix<T>::init(size_t h, size_t w) {
-	if (h < 1 || w < 1) {
-		throw InvalidDimensionException();
-		return;
-	}
-	nrows = h, ncols = w, size = h * w;
-	matrix = new T[size * sizeof(T)];
-	isTranspose = false;
 }
 
 template <class T>

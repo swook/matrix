@@ -28,6 +28,7 @@ private:
 	size_t ncols;
 	bool isTranspose;
 	void init(size_t, size_t);      // Common function for constructors
+	void copy(const Matrix&);
 public:
 	// Constructors and Destructor
 	Matrix(size_t);
@@ -47,7 +48,7 @@ public:
 	void   Add(const T);
 	void   Sub(const Matrix&);
 	void   Sub(const T);
-	Matrix Mult(const Matrix&);
+	Matrix Mult(const Matrix&) const;
 	void   Mult(const T);
 	void   Div(const T);
 
@@ -59,14 +60,7 @@ public:
 	// Overloaded operators
 	T& operator() (size_t) const;
 	T& operator() (size_t, size_t) const ;
-
-	Matrix operator+ (const Matrix&);
-	Matrix operator+ (const T);
-	Matrix operator- (const Matrix&);
-	Matrix operator- (const T);
-	Matrix operator* (const Matrix&);
-	Matrix operator* (const T);
-	Matrix operator/ (const T);
+	Matrix& operator=   (const Matrix&);
 };
 
 #endif
