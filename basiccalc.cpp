@@ -119,7 +119,7 @@ T Matrix<T>::Norm2Squared() {
 // 3x1 matrix cross product
 template <class T>
 Matrix<T> Matrix<T>::VectorProduct(const Matrix& m) {
-	if (height() != 3 || m.height() != 3 || width() != 1 || m.width() != 3) {
+	if (height() != 3 || m.height() != 3 || width() != 1 || m.width() != 1) {
 		throw InvalidDimensionException();
 	}
 
