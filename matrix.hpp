@@ -14,9 +14,7 @@
 
 /* Matrix class for basic matrix operations */
 
-// Prevent multiple imports
-#ifndef __MATRIX_HPP_INCLUDED__
-#define __MATRIX_HPP_INCLUDED__
+#pragma once
 
 #include <cstddef>
 
@@ -62,5 +60,3 @@ public:
 	T& operator() (size_t, size_t) const ;
 	Matrix& operator=   (const Matrix&);
 };
-
-#endif

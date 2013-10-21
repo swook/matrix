@@ -14,11 +14,8 @@
 
 /* Custom exceptions */
 
+#pragma once
 #include <exception>
-
-// Prevent multiple imports
-#ifndef __EXCEPTIONS_HPP_INCLUDED__
-#define __EXCEPTIONS_HPP_INCLUDED__
 
 // Exception for invalid dimensions provided on Matrix construction.
 class InvalidDimensionException : public std::exception {
@@ -40,5 +37,3 @@ class DimensionMismatchException : public std::exception {
 		return "Dimension mismatch.";
 	}
 };
-
-#endif
