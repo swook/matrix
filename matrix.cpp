@@ -64,6 +64,8 @@ Matrix<T>::Matrix(const Matrix& m) {
 
 // Destructor declaration for future use.
 template <class T>
+Matrix<T>::~Matrix() {
+	delete[] matrix;
 }
 
 template <class T>
