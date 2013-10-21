@@ -58,5 +58,13 @@ public:
 	// Overloaded operators
 	T& operator() (size_t) const;
 	T& operator() (size_t, size_t) const ;
-	Matrix& operator=   (const Matrix&);
+	Matrix& operator=  (const Matrix&);
+	Matrix& operator+= (const Matrix&);
+	Matrix& operator+= (const T&);
+	Matrix& operator-= (const Matrix&);
+	Matrix& operator-= (const T&);
+	Matrix& operator*= (const Matrix&);
+	Matrix& operator*= (const T&);
+	Matrix& operator/= (const Matrix&);
+	Matrix& operator/= (const T&);
 };

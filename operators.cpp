@@ -90,6 +90,18 @@ Matrix<T> operator+ (const T v, const Matrix<T>& m) {
 	return n;
 }
 
+template <class T>
+Matrix<T>& Matrix<T>::operator+= (const Matrix<T>& m) {
+	this->Add(m);
+	return *this;
+}
+
+template <class T>
+Matrix<T>& Matrix<T>::operator+= (const T& v) {
+	this->Add(v);
+	return *this;
+}
+
 // Convenience - overload for subtracting matrices.
 // Note: Duplicates this matrix to return answer.
 template <class T>
@@ -113,6 +125,18 @@ Matrix<T> operator- (const T v, const Matrix<T>& m) {
 	return n;
 }
 
+template <class T>
+Matrix<T>& Matrix<T>::operator-= (const Matrix<T>& m) {
+	this->Sub(m);
+	return *this;
+}
+
+template <class T>
+Matrix<T>& Matrix<T>::operator-= (const T& v) {
+	this->Sub(v);
+	return *this;
+}
+
 // * overload for multiplying matrices.
 // Note: Necessarily creates new matrix to return answer by value.
 template <class T>
@@ -133,6 +157,18 @@ Matrix<T> operator* (const T v, const Matrix<T>& m) {
 	return n;
 }
 
+template <class T>
+Matrix<T>& Matrix<T>::operator*= (const Matrix<T>& m) {
+	this->Mult(m);
+	return *this;
+}
+
+template <class T>
+Matrix<T>& Matrix<T>::operator*= (const T& v) {
+	this->Mult(v);
+	return *this;
+}
+
 // / overload for dividing matrix elements by provided value.
 // Note: Necessarily creates new matrix to return answer by value.
 template <class T>
@@ -140,4 +176,10 @@ Matrix<T> operator/ (const Matrix<T>& m, const T v) {
 	Matrix<T> n = Matrix<T>(m);
 	n.Div(v);
 	return n;
+}
+
+template <class T>
+Matrix<T>& Matrix<T>::operator/= (const T& v) {
+	this->Div(v);
+	return *this;
 }
