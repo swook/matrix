@@ -127,4 +127,6 @@ Matrix<T> Matrix<T>::VectorProduct(const Matrix& m) {
 	n.matrix[0] = matrix[1] * m.matrix[2] - matrix[2] * m.matrix[1];
 	n.matrix[1] = matrix[2] * m.matrix[0] - matrix[0] * m.matrix[2];
 	n.matrix[2] = matrix[0] * m.matrix[1] - matrix[1] * m.matrix[0];
+
+	return n;
 }
