@@ -25,13 +25,15 @@
 // Common constructor for matrix of size hxw.
 template <class T>
 void Matrix<T>::init(size_t h, size_t w) {
-	if (h < 1 || w < 1) {
-		throw InvalidDimensionException();
-		return;
-	}
 	nrows = h, ncols = w, size = h * w;
 	matrix = new T[size]();
 	isTranspose = false;
+}
+
+// Default constructor for an empty matrix
+template <class T>
+Matrix<T>::Matrix() {
+	init(0, 0);
 }
 
 // Constructor for square matrix of size NxN.
@@ -44,6 +46,17 @@ Matrix<T>::Matrix(size_t N) {
 template <class T>
 Matrix<T>::Matrix(size_t h, size_t w) {
 	init(h, w);
+}
+
+// Constructor for matrix of size hxw with elements v.
+template <class T>
+Matrix<T>::Matrix(size_t h, size_t w, const T& v) {
+	init(h, w);
+
+	size_t i;
+	for (i = 0; i < size; i++) {
+		matrix[i] = v;
+	}
 }
 
 // Copy matrix into new matrix

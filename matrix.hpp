@@ -29,8 +29,10 @@ private:
 	void copy(const Matrix&);
 public:
 	// Constructors and Destructor
+	Matrix();
 	Matrix(size_t);
 	Matrix(size_t, size_t);
+	Matrix(size_t, size_t, const T&);
 	Matrix(const Matrix&); // For matrix duplication
 	~Matrix();
 
