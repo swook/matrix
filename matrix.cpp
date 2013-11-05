@@ -123,9 +123,11 @@ bool Matrix<T>::Equal(Matrix& m) {
 
 // foreach takes a function and applies a calculation per element.
 template <class T>
-void Matrix<T>::Foreach(T f(T)) {
-	size_t i;
-	for (i = 0; i < size; i++) {
-		matrix[i] = f(matrix[i]);
+void Matrix<T>::Foreach(T (*f)(size_t, size_t, T)) {
+	size_t i, j, h = height() + 1, w = width() + 1;
+	for (j = 1; j < h; j++) {
+		for (i = 1; i < w; i++) {
+			(*this)(j, i) = (*f)(j, i, matrix[i]);
+		}
 	}
 }

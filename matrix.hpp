@@ -41,7 +41,7 @@ public:
 	size_t height() const;
 	size_t width()  const;
 	bool   Equal(Matrix&);
-	void   Foreach(T (T));
+	void   Foreach(T (*f)(size_t, size_t, T));
 
 	// Calculation methods
 	void   Add(const Matrix&);
