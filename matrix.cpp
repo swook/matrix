@@ -62,6 +62,7 @@ Matrix<T>::Matrix(size_t h, size_t w, const T& v) {
 // Copy matrix into new matrix
 template <class T>
 void Matrix<T>::copy(const Matrix& m) {
+	delete[] matrix;
 	init(m.nrows, m.ncols);
 	isTranspose = m.isTranspose;
 
